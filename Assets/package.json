@@ -1,0 +1,7 @@
+{
+    "description": "Drama Player base FSM.",
+    "displayName": "Drama Player",
+    "name": "com.mgs.dramaplayer",
+    "unity": "2019.4",
+    "version": "1.0.0"
+}

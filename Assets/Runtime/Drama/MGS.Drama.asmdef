@@ -1,0 +1,16 @@
+{
+    "name": "MGS.Drama",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4f53fe3baf7754546ad5a44d7288dd7d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

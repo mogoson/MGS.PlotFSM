@@ -1,0 +1,16 @@
+{
+    "name": "MGS.FSM.Editor",
+    "rootNamespace": "",
+    "references": [
+        "MGS.FSM"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

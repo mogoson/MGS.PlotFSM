@@ -1,0 +1,29 @@
+{
+    "description": "Test",
+    "name": "Test",
+    "plots": [
+        {
+            "param": {
+                "uiName": "",
+				"sceneName":"TestCubeScene",
+				"loadMode":"Additive",
+                "unloadExit": true,
+				"objName":"Cube"
+            },
+            "type": "DramaTest.TestScenePlot, MGS.Drama.Tests"
+        },
+        {
+            "param": {
+                "uiName": "",
+				"sceneName":"TestSphereScene",
+				"loadMode":"Additive",
+                "unloadExit": true,
+				"objName":"Sphere"
+            },
+            "type": "DramaTest.TestScenePlot, MGS.Drama.Tests"
+        }
+    ],
+    "setting": {
+    },
+    "version": "1.0.0"
+}
