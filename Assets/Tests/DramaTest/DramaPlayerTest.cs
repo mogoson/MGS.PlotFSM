@@ -10,22 +10,44 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
+using System.Collections;
+using System.IO;
 using MGS.Drama;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Collections;
-using System.IO;
 using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace DramaTest
 {
     /// <summary>
+    /// The global setting of drama.
+    /// </summary>
+    [Serializable]
+    public class SettingsTest
+    {
+        public string bgAudio;
+    }
+
+    /// <summary>
+    /// DramaMeta for test.
+    /// </summary>
+    [Serializable]
+    public class DramaMetaTest : DramaMeta
+    {
+        /// <summary>
+        /// The global setting of drama.
+        /// </summary>
+        public SettingsTest setting;
+    }
+
+    /// <summary>
     /// Unit test class for DramaPlayer.
     /// </summary>
     public class DramaPlayerTest
     {
-        IDramaPlayer player;
+        IDramaPlayer<DramaMetaTest> player;
 
         /// <summary>
         /// Set up the test environment before each test case.
@@ -33,7 +55,7 @@ namespace DramaTest
         [SetUp]
         public void SetUp()
         {
-            player = new DramaPlayer();
+            player = new DramaPlayer<DramaMetaTest>();
         }
 
         /// <summary>
@@ -54,7 +76,7 @@ namespace DramaTest
         {
             var file = $"{Application.dataPath}/Tests/DramaTest/DramaMeta.json";
             var json = File.ReadAllText(file);
-            var meta = JsonConvert.DeserializeObject<DramaMeta>(json);
+            var meta = JsonConvert.DeserializeObject<DramaMetaTest>(json);
 
             player.Init(meta);
             player.Start();

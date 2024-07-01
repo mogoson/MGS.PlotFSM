@@ -15,18 +15,19 @@ namespace MGS.Drama
     /// <summary>
     /// Interface for playing dramas.
     /// </summary>
-    public interface IDramaPlayer
+    /// <typeparam name="T">Type of the metadata of the drama.</typeparam>
+    public interface IDramaPlayer<T> where T : DramaMeta
     {
         /// <summary>
         /// Gets the metadata of the drama.
         /// </summary>
-        DramaMeta Meta { get; }
+        T Meta { get; }
 
         /// <summary>
         /// Initializes the drama player with the specified metadata.
         /// </summary>
         /// <param name="meta">The metadata of the drama.</param>
-        void Init(DramaMeta meta);
+        void Init(T meta);
 
         /// <summary>
         /// Starts playing the drama.

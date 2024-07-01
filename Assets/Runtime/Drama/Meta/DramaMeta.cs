@@ -36,11 +36,6 @@ namespace MGS.Drama
         public string version;
 
         /// <summary>
-        /// The setting of the drama.
-        /// </summary>
-        public object setting;
-
-        /// <summary>
         /// The plots of the drama.
         /// </summary>
         public PlotMeta[] plots;

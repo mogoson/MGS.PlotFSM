@@ -4,26 +4,27 @@
     "plots": [
         {
             "param": {
+                "loadMode": "Additive",
+                "objName": "Cube",
+                "sceneName": "TestCubeScene",
                 "uiName": "",
-				"sceneName":"TestCubeScene",
-				"loadMode":"Additive",
-                "unloadExit": true,
-				"objName":"Cube"
+                "unloadExit": true
             },
             "type": "DramaTest.TestScenePlot, MGS.Drama.Tests"
         },
         {
             "param": {
+                "loadMode": "Additive",
+                "objName": "Sphere",
+                "sceneName": "TestSphereScene",
                 "uiName": "",
-				"sceneName":"TestSphereScene",
-				"loadMode":"Additive",
-                "unloadExit": true,
-				"objName":"Sphere"
+                "unloadExit": true
             },
             "type": "DramaTest.TestScenePlot, MGS.Drama.Tests"
         }
     ],
     "setting": {
+        "bgAudio": ""
     },
     "version": "1.0.0"
 }

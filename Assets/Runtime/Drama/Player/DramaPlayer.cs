@@ -15,12 +15,13 @@ namespace MGS.Drama
     /// <summary>
     /// Represents a drama player.
     /// </summary>
-    public class DramaPlayer : IDramaPlayer
+    /// <typeparam name="T">Type of the metadata of the drama.</typeparam>
+    public class DramaPlayer<T> : IDramaPlayer<T> where T : DramaMeta
     {
         /// <summary>
         /// Gets or sets the drama meta.
         /// </summary>
-        public DramaMeta Meta { protected set; get; }
+        public T Meta { protected set; get; }
 
         /// <summary>
         /// The finite state machine for managing the plots.
@@ -39,7 +40,7 @@ namespace MGS.Drama
         /// Initializes the drama player with the specified drama meta.
         /// </summary>
         /// <param name="meta">The drama meta.</param>
-        public virtual void Init(DramaMeta meta)
+        public virtual void Init(T meta)
         {
             Meta = meta;
             var plots = PlotFactory.CreateFromMeta(meta.plots);
