@@ -1,30 +1,33 @@
 /*************************************************************************
  *  Copyright (C) 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  LoadScenePlot.cs
+ *  File         :  PlotMeta.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0.0
- *  Date         :  2024/3/15
+ *  Date         :  2024/2/23
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.Drama
+using System;
+
+namespace MGS.Plot
 {
+    [Serializable]
     /// <summary>
-    /// Represents a plot that loads a scene.
+    /// Represents a plot meta.
     /// </summary>
-    /// <typeparam name="ScenePlotParam">The type of the plot parameter.</typeparam>
-    public class LoadScenePlot : ScenePlot<ScenePlotParam>
+    public class PlotMeta
     {
         /// <summary>
-        /// Called when the plot is entered.
+        /// Gets or sets the type of the plot.
         /// </summary>
-        public override void Enter()
-        {
-            base.Enter();
-            OnCompleted();
-        }
+        public string type;
+
+        /// <summary>
+        /// Gets or sets the parameter of the plot.
+        /// </summary>
+        public object param;
     }
 }

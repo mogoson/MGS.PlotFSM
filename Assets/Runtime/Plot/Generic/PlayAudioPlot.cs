@@ -13,7 +13,7 @@
 using System;
 using UnityEngine;
 
-namespace MGS.Drama
+namespace MGS.Plot
 {
     /// <summary>
     /// Represents the parameters for an audio plot.

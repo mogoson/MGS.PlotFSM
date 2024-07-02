@@ -14,7 +14,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace MGS.Drama
+namespace MGS.Plot
 {
     /// <summary>
     /// Represents the parameters for a video plot.

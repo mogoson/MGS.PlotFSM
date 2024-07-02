@@ -1,11 +1,11 @@
 {
-    "name": "MGS.Drama.Tests",
+    "name": "MGS.Plot.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "MGS.FSM",
-        "MGS.Drama"
+        "MGS.Plot"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Copyright (C) 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  DramaPlayerTest.cs
+ *  File         :  PlotFSMTest.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -10,44 +10,22 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using System;
 using System.Collections;
 using System.IO;
-using MGS.Drama;
+using MGS.Plot;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace DramaTest
+namespace PlotTest
 {
-    /// <summary>
-    /// The global setting of drama.
-    /// </summary>
-    [Serializable]
-    public class SettingsTest
-    {
-        public string bgAudio;
-    }
-
-    /// <summary>
-    /// DramaMeta for test.
-    /// </summary>
-    [Serializable]
-    public class DramaMetaTest : DramaMeta
-    {
-        /// <summary>
-        /// The global setting of drama.
-        /// </summary>
-        public SettingsTest setting;
-    }
-
     /// <summary>
     /// Unit test class for DramaPlayer.
     /// </summary>
-    public class DramaPlayerTest
+    public class PlotFSMTest
     {
-        IDramaPlayer<DramaMetaTest> player;
+        IPlotFSM plotFSM;
 
         /// <summary>
         /// Set up the test environment before each test case.
@@ -55,7 +33,7 @@ namespace DramaTest
         [SetUp]
         public void SetUp()
         {
-            player = new DramaPlayer<DramaMetaTest>();
+            plotFSM = new PlotFSM();
         }
 
         /// <summary>
@@ -64,22 +42,22 @@ namespace DramaTest
         [TearDown]
         public void TearDown()
         {
-            player.Release();
-            player = null;
+            plotFSM.Release();
+            plotFSM = null;
         }
 
         /// <summary>
-        /// Unit test for running plots in the DramaPlayer.
+        /// Unit test for running plots in the PlotFSM.
         /// </summary>
         [UnityTest]
-        public IEnumerator TestPlayerRunPlots()
+        public IEnumerator TestFSMRunPlots()
         {
-            var file = $"{Application.dataPath}/Tests/DramaTest/DramaMeta.json";
+            var file = $"{Application.dataPath}/Tests/PlotTest/PlotMeta.json";
             var json = File.ReadAllText(file);
-            var meta = JsonConvert.DeserializeObject<DramaMetaTest>(json);
+            var plots = JsonConvert.DeserializeObject<PlotMeta[]>(json);
 
-            player.Init(meta);
-            player.Start();
+            plotFSM.Initialize(plots);
+            plotFSM.Start();
 
             yield return new WaitForSeconds(30);
         }

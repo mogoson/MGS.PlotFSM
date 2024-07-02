@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Copyright (C) 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  IPlotFSM.cs
+ *  File         :  IPlot.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -11,24 +11,18 @@
  *************************************************************************/
 
 using MGS.FSM;
-using System.Collections.Generic;
 
-namespace MGS.Drama
+namespace MGS.Plot
 {
     /// <summary>
-    /// Represents a plot finite state machine.
+    /// Represents a plot in a drama.
     /// </summary>
-    public interface IPlotFSM : IFSM
+    public interface IPlot : IState
     {
         /// <summary>
-        /// Gets or sets the current plot state.
+        /// Initializes the plot with the specified parameter.
         /// </summary>
-        new IPlot State { get; }
-
-        /// <summary>
-        /// Enqueues a collection of plot states.
-        /// </summary>
-        /// <param name="states">The collection of plot states to enqueue.</param>
-        void Enqueue(IEnumerable<IPlot> states);
+        /// <param name="param">The parameter to initialize the plot.</param>
+        void Init(object param);
     }
 }

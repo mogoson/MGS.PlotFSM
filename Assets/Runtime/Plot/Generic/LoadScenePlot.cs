@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Copyright (C) 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ScenePlot.cs
+ *  File         :  LoadScenePlot.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -15,7 +15,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MGS.Drama
+namespace MGS.Plot
 {
     /// <summary>
     /// Parameters for the scene plot.
@@ -45,10 +45,10 @@ namespace MGS.Drama
     }
 
     /// <summary>
-    /// Base class for scene plots.
+    /// Base class for load scene plots.
     /// </summary>
     /// <typeparam name="T">The type of the scene plot parameters.</typeparam>
-    public abstract class ScenePlot<T> : Plot<T> where T : ScenePlotParam
+    public abstract class LoadScenePlot<T> : Plot<T> where T : ScenePlotParam
     {
         protected GameObject uiGo;
 

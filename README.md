@@ -1,10 +1,10 @@
-# MGS.DramaPlayer
+# MGS.PlotFSM
 # Summary
 
-Drama Player base on FSM to play sequence plots.
+FSM to play sequence plots.
 
 # Demand
-- Player to manage and control plot.
+- FSM to manage and control plot.
 - Extend custom Plot.
 - Config plots in json file.
 
@@ -13,17 +13,17 @@ Drama Player base on FSM to play sequence plots.
 - Unity 2021 or above.
 
 # Config
-- Config plots in a json file, like DramaMeta.json.
+- Config plots in a json file, like PlotFSMTest.json.
 
 # Extend
 - Create a class for plot and inherit from the Plot<T>.
 - Create a class or struct for parameter of plot.
 
 # Usage
-1. Create a Instance of DramaPlayer.
+1. Create a Instance of PlotFSM.
 1.  Read config file (json content).
-1.  Deserialize json content to DramaMeta.
-1.   Init DramaPlayer.
+1.  Deserialize json content to PlotMeta array.
+1.   Init PlotFSM.
 
 ---
 

@@ -13,7 +13,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MGS.Drama
+namespace MGS.Plot
 {
     /// <summary>
     /// Factory class for creating plot instances.
@@ -36,9 +36,9 @@ namespace MGS.Drama
         /// <summary>
         /// Creates a collection of plot instances based on the provided plot metadata collection.
         /// </summary>
-        /// <param name="metas">The plot metadata collection.</param>
+        /// <param name="metas">Plot meta datas.</param>
         /// <returns>The created plot instances.</returns>
-        public static ICollection<IPlot> CreateFromMeta(ICollection<PlotMeta> metas)
+        public static ICollection<IPlot> CreateFromMeta(IEnumerable<PlotMeta> metas)
         {
             var plots = new List<IPlot>();
             foreach (var meta in metas)

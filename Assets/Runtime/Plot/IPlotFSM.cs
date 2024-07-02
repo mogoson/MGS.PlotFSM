@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Copyright (C) 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  PlotFSM.cs
+ *  File         :  IPlotFSM.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -11,34 +11,30 @@
  *************************************************************************/
 
 using System.Collections.Generic;
-using System.Linq;
 using MGS.FSM;
 
-namespace MGS.Drama
+namespace MGS.Plot
 {
     /// <summary>
-    /// Represents a finite state machine for managing plots in a drama.
+    /// Represents a plot finite state machine.
     /// </summary>
-    public class PlotFSM : MonoFSM, IPlotFSM
+    public interface IPlotFSM : IFSM
     {
         /// <summary>
-        /// Gets the current state of the plot FSM.
+        /// Gets or sets the current plot state.
         /// </summary>
-        public new IPlot State { get { return base.State as IPlot; } }
+        new IPlot State { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlotFSM"/> class.
+        /// Initialize PlotFSM with plot metadata.
         /// </summary>
-        public PlotFSM() : base() { }
+        /// <param name="metas">Plot meta datas.</param>
+        void Initialize(IEnumerable<PlotMeta> metas);
 
         /// <summary>
-        /// Enqueues a collection of plots to be processed by the FSM.
+        /// Enqueues a collection of plot states.
         /// </summary>
-        /// <param name="plots">The collection of plots to enqueue.</param>
-        public void Enqueue(IEnumerable<IPlot> plots)
-        {
-            var states = plots.Cast<IState>();
-            base.Enqueue(states);
-        }
+        /// <param name="states">The collection of plot states to enqueue.</param>
+        void Enqueue(IEnumerable<IPlot> states);
     }
 }

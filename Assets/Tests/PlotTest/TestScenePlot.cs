@@ -11,10 +11,10 @@
  *************************************************************************/
 
 using System;
-using MGS.Drama;
+using MGS.Plot;
 using UnityEngine;
 
-namespace DramaTest
+namespace PlotTest
 {
     [Serializable]
     /// <summary>
@@ -31,7 +31,7 @@ namespace DramaTest
     /// <summary>
     /// Represents a test scene plot.
     /// </summary>
-    public class TestScenePlot : ScenePlot<TestScenePlotParam>
+    public class TestScenePlot : LoadScenePlot<TestScenePlotParam>
     {
         /// <summary>
         /// Called when entering the test scene plot.
