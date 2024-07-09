@@ -31,7 +31,7 @@ namespace PlotTest
     /// <summary>
     /// Represents a test scene plot.
     /// </summary>
-    public class TestScenePlot : LoadScenePlot<TestScenePlotParam>
+    public class TestScenePlot : BaseScenePlot<TestScenePlotParam>
     {
         /// <summary>
         /// Called when entering the test scene plot.
