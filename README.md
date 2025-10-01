@@ -1,30 +1,37 @@
+[TOC]
+
 # MGS.PlotFSM
-# Summary
+
+## Summary
 
 FSM to play sequence plots.
 
-# Demand
+## Ability
+
 - FSM to manage and control plot.
 - Extend custom Plot.
 - Config plots in json file.
 
-# Environment
-- .net framework 4.6 or above.
-- Unity 2021 or above.
+## Install
 
-# Config
-- Config plots in a json file, like PlotFSMTest.json.
+- Unity --> Window --> Package Manager --> "+" --> Add package from git URL...
 
-# Extend
-- Create a class for plot and inherit from the Plot<T>.
-- Create a class or struct for parameter of plot.
+  ```text
+  https://github.com/mogoson/MGS.PlotFSM.git?path=/Assets
+  ```
+
+## Usage
 
 # Usage
 1. Create a Instance of PlotFSM.
-1.  Read config file (json content).
-1.  Deserialize json content to PlotMeta array.
-1.   Init PlotFSM.
+1. Read config file (json content).
+1. Deserialize json content to PlotMeta array.
+1. Init PlotFSM.
+
+## Samples
+
+- Unity --> Window --> Package Manager --> Packages-Mogoson --> Plot FSM --> Samples.
 
 ---
 
-Copyright © 2024 Mogoson.	mogoson@outlook.com
+Copyright © 2025 Mogoson.	mogoson@outlook.com

@@ -1,7 +1,16 @@
 {
-    "description": "Plot Play base FSM.",
-    "displayName": "Plot FSM",
     "name": "com.mgs.plotfsm",
-    "unity": "2019.4",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "displayName": "Plot FSM",
+    "description": "Plot Play base FSM.",
+    "unity": "2021.3",
+    "keywords": [
+        "plot",
+        "FSM"
+    ],
+    "author": {
+        "name": "Mogoson",
+        "email": "mogoson@outlook.com",
+        "url": "https://github.com/mogoson"
+    }
 }
