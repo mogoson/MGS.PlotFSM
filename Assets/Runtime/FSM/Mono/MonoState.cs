@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MonoState.cs
  *  Description  :  Null.
@@ -125,15 +125,6 @@ namespace MGS.FSM
         protected void StopCoroutine(Coroutine routine)
         {
             mono.StopCoroutine(routine);
-        }
-
-        /// <summary>
-        /// Exits the state.
-        /// </summary>
-        public override void Exit()
-        {
-            base.Exit();
-            mono = null;
         }
     }
 }

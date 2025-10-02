@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  PlotFSM.cs
  *  Description  :  Null.
@@ -22,20 +22,15 @@ namespace MGS.Plot
     public class PlotFSM : MonoFSM, IPlotFSM
     {
         /// <summary>
-        /// Gets the current state of the plot FSM.
+        /// Get the current plot state.
         /// </summary>
         public new IPlot State { get { return base.State as IPlot; } }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlotFSM"/> class.
-        /// </summary>
-        public PlotFSM() : base() { }
-
-        /// <summary>
-        /// Initialize PlotFSM with plot metadata.
+        /// Enqueue plot states base on plot meta.
         /// </summary>
         /// <param name="metas">Plot meta datas.</param>
-        public void Initialize(IEnumerable<PlotMeta> metas)
+        public void Enqueue(IEnumerable<PlotMeta> metas)
         {
             var plots = PlotFactory.CreateFromMeta(metas);
             Enqueue(plots);

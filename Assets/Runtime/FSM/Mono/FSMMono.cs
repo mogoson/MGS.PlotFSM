@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  FSMMono.cs
  *  Description  :  Null.
@@ -26,20 +26,6 @@ namespace MGS.FSM
         public event Action OnUpdate;
 
         /// <summary>
-        /// Creates a new instance of FSMMono.
-        /// </summary>
-        /// <returns>The created FSMMono instance.</returns>
-        public static FSMMono CreateOne()
-        {
-            var go = new GameObject(typeof(FSMMono).Name);
-            DontDestroyOnLoad(go);
-
-            var mono = go.AddComponent<FSMMono>();
-            mono.enabled = false;
-            return mono;
-        }
-
-        /// <summary>
         /// Updates the FSM.
         /// </summary>
         private void Update()
@@ -47,27 +33,18 @@ namespace MGS.FSM
             OnUpdate?.Invoke();
         }
 
-        /// <summary>
-        /// Releases the FSMMono instance.
-        /// </summary>
-        public void Release()
-        {
-            OnUpdate = null;
-            Destroy(gameObject);
-        }
-
 #if UNITY_EDITOR
         /// <summary>
-        /// Event triggered when skip.
+        /// Event triggered when seek.
         /// </summary>
-        public event Action OnSkip;
+        public event Action<int> OnSeek;
 
         /// <summary>
-        /// Skips to the next state in the FSM.
+        /// Seek to the Index+snap state in the FSM.
         /// </summary>
-        public void Skip()
+        public void Seek(int snap)
         {
-            OnSkip?.Invoke();
+            OnSeek?.Invoke(snap);
         }
 #endif
     }

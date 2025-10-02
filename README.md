@@ -26,7 +26,7 @@ FSM to play sequence plots.
 1. Create a Instance of PlotFSM.
 1. Read config file (json content).
 1. Deserialize json content to PlotMeta array.
-1. Init PlotFSM.
+1. Enqueue PlotMeta to PlotFSM.
 
 ## Samples
 

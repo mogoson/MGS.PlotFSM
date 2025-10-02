@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MonoFSMEditor.cs
  *  Description  :  Null.
@@ -17,11 +17,18 @@ namespace MGS.FSM.Editors
 {
     public class MonoFSMEditor
     {
-        [MenuItem("Tool/Mono FSM Editor/Skip")]
-        public static void Skip()
+        [MenuItem("Tool/Mono FSM/Previous")]
+        public static void Previous()
         {
             var fsmMono = Object.FindObjectOfType<FSMMono>();
-            fsmMono?.Skip();
+            fsmMono?.Seek(-1);
+        }
+
+        [MenuItem("Tool/Mono FSM/Next")]
+        public static void Next()
+        {
+            var fsmMono = Object.FindObjectOfType<FSMMono>();
+            fsmMono?.Seek(1);
         }
     }
 }

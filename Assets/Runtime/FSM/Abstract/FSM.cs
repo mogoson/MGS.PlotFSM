@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  FSM.cs
  *  Description  :  Null.
@@ -15,31 +15,37 @@ using System.Collections.Generic;
 namespace MGS.FSM
 {
     /// <summary>
-    /// Finite State Machine base class.
+    /// Finite state machine.
     /// </summary>
     public abstract class FSM : IFSM
     {
         /// <summary>
-        /// The current index of the state in the FSM.
+        /// Current index of the state.
         /// </summary>
         public int Index { protected set; get; }
 
         /// <summary>
-        /// The current state of the FSM.
+        /// Count of states.
         /// </summary>
-        public IState State { get { return Find(Index); } }
-        protected List<IState> states;
+        public int Count { get { return states.Count; } }
 
         /// <summary>
-        /// Constructor of the FSM class.
+        /// Current state.
         /// </summary>
-        public FSM()
+        public IState State { protected set; get; }
+        protected List<IState> states = new();
+
+        /// <summary>
+        /// Enqueues state to state machine.
+        /// </summary>
+        /// <param name="states">The state to enqueue.</param>
+        public virtual void Enqueue(IState state)
         {
-            states = new List<IState>();
+            states.Add(state);
         }
 
         /// <summary>
-        /// Enqueues a collection of states to the FSM.
+        /// Enqueues states to state machine.
         /// </summary>
         /// <param name="states">The states to enqueue.</param>
         public virtual void Enqueue(IEnumerable<IState> states)
@@ -48,12 +54,15 @@ namespace MGS.FSM
         }
 
         /// <summary>
-        /// Dequeues a state from the FSM.
+        /// Dequeues a specific state from the state machine.
         /// </summary>
         /// <param name="state">The state to dequeue.</param>
         public virtual void Dequeue(IState state)
         {
-            ExitState(state);
+            if (state == State)
+            {
+                ExitState(state);
+            }
             states.Remove(state);
         }
 
@@ -73,13 +82,16 @@ namespace MGS.FSM
         public abstract void Start();
 
         /// <summary>
-        /// Seeks to a specific state in the FSM.
+        /// Seeks the state machine to a specific index.
         /// </summary>
-        /// <param name="index">The index of the state to seek.</param>
+        /// <param name="index">The index to seek to.</param>
         public virtual void Seek(int index)
         {
-            ExitState(State);
-            Index = index;
+            if (Index != index)
+            {
+                ExitState(State);
+                Index = index;
+            }
         }
 
         /// <summary>
@@ -110,6 +122,7 @@ namespace MGS.FSM
         /// </summary>
         protected void Update()
         {
+            State = Find(Index);
             if (State == null)
             {
                 return;
@@ -132,9 +145,9 @@ namespace MGS.FSM
                     var next = Find(Index + 1);
                     if (next == null || next.Status == Status.Prepared)
                     {
+                        Index++;
                         State.Exit();
                         next?.Enter();
-                        Index++;
                     }
                     else if (next.Status == Status.None)
                     {

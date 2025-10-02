@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  PlayAudioPlot.cs
  *  Description  :  Null.
@@ -29,12 +29,17 @@ namespace MGS.Plot
         /// <summary>
         /// The volume of the audio clip.
         /// </summary>
-        public float volume = 1.0f;
+        public float volume;
 
         /// <summary>
         /// The pitch of the audio clip.
         /// </summary>
-        public float pitch = 1.0f;
+        public float pitch;
+
+        /// <summary>
+        /// Determines whether the audio should loop.
+        /// </summary>
+        public bool loop;
 
         /// <summary>
         /// The duration of the audio clip.
@@ -59,7 +64,7 @@ namespace MGS.Plot
             audioSource.clip = LoadAudioClip(param.audio);
             audioSource.volume = param.volume;
             audioSource.pitch = param.pitch;
-            audioSource.loop = true;
+            audioSource.loop = param.loop;
             OnPrepared();
         }
 
@@ -70,8 +75,13 @@ namespace MGS.Plot
         {
             base.Enter();
             audioSource.Play();
-            param.duration = param.duration > 0 ? param.duration : audioSource.clip.length;
-            DelayInvokeAsync(param.duration, OnCompleted);
+
+            var isCustomDuration = param.duration > 0;
+            if (isCustomDuration || !param.loop)
+            {
+                var duration = isCustomDuration ? param.duration : audioSource.clip.length;
+                DelayInvokeAsync((float)duration, OnCompleted);
+            }
         }
 
         /// <summary>
@@ -81,7 +91,12 @@ namespace MGS.Plot
         /// <returns>The loaded audio clip.</returns>
         protected AudioClip LoadAudioClip(string url)
         {
-            return Resources.Load<AudioClip>(url);
+            var clip = Resources.Load<AudioClip>(url);
+            if (clip == null)
+            {
+                Debug.LogError($"Can not load AudioClip from {url}");
+            }
+            return clip;
         }
 
         /// <summary>
@@ -90,7 +105,7 @@ namespace MGS.Plot
         /// <returns>The created audio source.</returns>
         protected AudioSource CreateAudioSource()
         {
-            var go = new GameObject(GetType().Name);
+            var go = new GameObject($"{GetType().Name}_{nameof(AudioSource)}");
             return go.AddComponent<AudioSource>();
         }
 

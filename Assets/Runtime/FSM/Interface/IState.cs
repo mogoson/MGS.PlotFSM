@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  IState.cs
  *  Description  :  Null.
@@ -13,17 +13,17 @@
 namespace MGS.FSM
 {
     /// <summary>
-    /// Represents a state in a finite state machine.
+    /// FSM State.
     /// </summary>
     public interface IState
     {
         /// <summary>
-        /// Gets the current status of the state.
+        /// Current status.
         /// </summary>
         Status Status { get; }
 
         /// <summary>
-        /// Prepares the state for execution.
+        /// Prepares the state.
         /// </summary>
         void Prepare();
 

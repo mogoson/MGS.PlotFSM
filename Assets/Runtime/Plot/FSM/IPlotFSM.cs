@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  IPlotFSM.cs
  *  Description  :  Null.
@@ -21,20 +21,20 @@ namespace MGS.Plot
     public interface IPlotFSM : IFSM
     {
         /// <summary>
-        /// Gets or sets the current plot state.
+        /// Get the current plot state.
         /// </summary>
         new IPlot State { get; }
 
         /// <summary>
-        /// Initialize PlotFSM with plot metadata.
+        /// Enqueue plot states base on plot meta.
         /// </summary>
         /// <param name="metas">Plot meta datas.</param>
-        void Initialize(IEnumerable<PlotMeta> metas);
+        void Enqueue(IEnumerable<PlotMeta> metas);
 
         /// <summary>
         /// Enqueues a collection of plot states.
         /// </summary>
-        /// <param name="states">The collection of plot states to enqueue.</param>
-        void Enqueue(IEnumerable<IPlot> states);
+        /// <param name="plots">The collection of plot states to enqueue.</param>
+        void Enqueue(IEnumerable<IPlot> plots);
     }
 }

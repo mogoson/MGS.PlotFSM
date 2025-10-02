@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  PlotMeta.cs
  *  Description  :  Null.
@@ -14,10 +14,10 @@ using System;
 
 namespace MGS.Plot
 {
-    [Serializable]
     /// <summary>
     /// Represents a plot meta.
     /// </summary>
+    [Serializable]
     public class PlotMeta
     {
         /// <summary>

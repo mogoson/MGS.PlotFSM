@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MonoFSM.cs
  *  Description  :  Null.
@@ -11,6 +11,7 @@
  *************************************************************************/
 
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace MGS.FSM
 {
@@ -27,14 +28,27 @@ namespace MGS.FSM
         /// <summary>
         /// Creates a new instance of MonoFSM.
         /// </summary>
-        public MonoFSM() : base()
+        public MonoFSM()
         {
-            mono = FSMMono.CreateOne();
+            mono = new GameObject(nameof(FSMMono)).AddComponent<FSMMono>();
+            Object.DontDestroyOnLoad(mono.gameObject);
+
+            mono.enabled = false;
             mono.OnUpdate += Update;
 
 #if UNITY_EDITOR
-            mono.OnSkip += Skip;
+            mono.OnSeek += snap => Seek(Index + snap);
 #endif
+        }
+
+        /// <summary>
+        /// Enqueues state to state machine.
+        /// </summary>
+        /// <param name="states">The state to enqueue.</param>
+        public override void Enqueue(IState state)
+        {
+            base.Enqueue(state);
+            (state as MonoState)?.Inject(mono);
         }
 
         /// <summary>
@@ -81,18 +95,8 @@ namespace MGS.FSM
         public override void Release()
         {
             base.Release();
-            mono.Release();
+            Object.Destroy(mono.gameObject);
             mono = null;
         }
-
-#if UNITY_EDITOR
-        /// <summary>
-        /// Skips to the next state in the FSM.
-        /// </summary>
-        protected void Skip()
-        {
-            Seek(Index + 1);
-        }
-#endif
     }
 }

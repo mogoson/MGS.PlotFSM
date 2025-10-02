@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  PlayVideoPlot.cs
  *  Description  :  Null.
@@ -29,18 +29,20 @@ namespace MGS.Plot
 
         /// <summary>
         /// The render mode of the video.
+        /// <see cref="VideoRenderMode"/>
         /// </summary>
         public string renderMode;
 
         /// <summary>
         /// The aspect ratio of the video.
+        /// <see cref="VideoAspectRatio"/>
         /// </summary>
         public string aspectRatio;
 
         /// <summary>
         /// Determines whether the video should loop.
         /// </summary>
-        public bool isLooping;
+        public bool loop;
 
         /// <summary>
         /// The duration of the video.
@@ -65,14 +67,13 @@ namespace MGS.Plot
 
             videoPlayer = CreateVideoPlayer();
             videoPlayer.targetCamera = Camera.main;
-            videoPlayer.renderMode = Enum.Parse<VideoRenderMode>(param.renderMode, true);
-            videoPlayer.aspectRatio = Enum.Parse<VideoAspectRatio>(param.aspectRatio, true);
-
-            videoPlayer.prepareCompleted += OnPrepareCompleted;
-            videoPlayer.loopPointReached += OnLoopPointReached;
 
             videoPlayer.clip = LoadVideoClip(param.video);
-            videoPlayer.isLooping = param.isLooping;
+            videoPlayer.renderMode = Enum.Parse<VideoRenderMode>(param.renderMode, true);
+            videoPlayer.aspectRatio = Enum.Parse<VideoAspectRatio>(param.aspectRatio, true);
+            videoPlayer.isLooping = param.loop;
+
+            videoPlayer.prepareCompleted += OnPrepareCompleted;
             videoPlayer.Prepare();
         }
 
@@ -83,29 +84,21 @@ namespace MGS.Plot
         /// <returns>The loaded video clip.</returns>
         protected VideoClip LoadVideoClip(string url)
         {
-            return Resources.Load<VideoClip>(url);
+            var clip = Resources.Load<VideoClip>(url);
+            if (clip == null)
+            {
+                Debug.LogError($"Can not load VideoClip from {url}");
+            }
+            return clip;
         }
 
         /// <summary>
         /// Called when the video player has completed preparing.
         /// </summary>
         /// <param name="source">The video player that completed preparing.</param>
-        private void OnPrepareCompleted(VideoPlayer source)
+        protected virtual void OnPrepareCompleted(VideoPlayer source)
         {
             OnPrepared();
-        }
-
-        /// <summary>
-        /// Called when the video player reaches the loop point.
-        /// </summary>
-        /// <param name="source">The video player that reached the loop point.</param>
-        private void OnLoopPointReached(VideoPlayer source)
-        {
-            if (param.isLooping || param.duration > 0)
-            {
-                return;
-            }
-            OnCompleted();
         }
 
         /// <summary>
@@ -114,7 +107,7 @@ namespace MGS.Plot
         /// <returns>The created video player.</returns>
         protected VideoPlayer CreateVideoPlayer()
         {
-            var go = new GameObject(GetType().Name);
+            var go = new GameObject($"{GetType().Name}_{nameof(VideoPlayer)}");
             return go.AddComponent<VideoPlayer>();
         }
 
@@ -125,9 +118,12 @@ namespace MGS.Plot
         {
             base.Enter();
             videoPlayer.Play();
-            if (param.duration > 0)
+
+            var isCustomDuration = param.duration > 0;
+            if (isCustomDuration || !param.loop)
             {
-                DelayInvokeAsync(param.duration, OnCompleted);
+                var duration = isCustomDuration ? param.duration : videoPlayer.clip.length;
+                DelayInvokeAsync((float)duration, OnCompleted);
             }
         }
 

@@ -12,5 +12,12 @@
         "name": "Mogoson",
         "email": "mogoson@outlook.com",
         "url": "https://github.com/mogoson"
-    }
+    },
+    "samples": [
+        {
+            "displayName": "Sample",
+            "description": "Sample for Plot Play base FSM.",
+            "path": "Samples~/Sample"
+        }
+    ]
 }

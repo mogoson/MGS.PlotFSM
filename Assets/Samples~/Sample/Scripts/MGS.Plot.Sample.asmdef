@@ -1,0 +1,17 @@
+{
+    "name": "MGS.Plot.Sample",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d3f1b6897b80a1f49995f69f49f97a4d",
+        "GUID:4f53fe3baf7754546ad5a44d7288dd7d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

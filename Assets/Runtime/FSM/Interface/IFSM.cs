@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  IFSM.cs
  *  Description  :  Null.
@@ -15,24 +15,35 @@ using System.Collections.Generic;
 namespace MGS.FSM
 {
     /// <summary>
-    /// Represents a finite state machine.
+    /// Finite state machine.
     /// </summary>
     public interface IFSM
     {
         /// <summary>
-        /// Gets the current index of the state machine.
+        /// Current index of the state.
         /// </summary>
         int Index { get; }
 
         /// <summary>
-        /// Gets the current state of the state machine.
+        /// Count of states.
+        /// </summary>
+        int Count { get; }
+
+        /// <summary>
+        /// Current state.
         /// </summary>
         IState State { get; }
 
         /// <summary>
-        /// Enqueues a collection of states to be processed by the state machine.
+        /// Enqueues state to state machine.
         /// </summary>
-        /// <param name="states">The collection of states to enqueue.</param>
+        /// <param name="states">The state to enqueue.</param>
+        void Enqueue(IState state);
+
+        /// <summary>
+        /// Enqueues states to state machine.
+        /// </summary>
+        /// <param name="states">The states to enqueue.</param>
         void Enqueue(IEnumerable<IState> states);
 
         /// <summary>

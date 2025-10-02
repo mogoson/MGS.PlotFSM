@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  Status.cs
  *  Description  :  Null.
@@ -13,7 +13,7 @@
 namespace MGS.FSM
 {
     /// <summary>
-    /// Represents the status of an FSM.
+    /// Status of FSM State.
     /// </summary>
     public enum Status
     {

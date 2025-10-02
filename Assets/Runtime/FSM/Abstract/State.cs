@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C) 2024 Mogoson. All rights reserved.
+﻿/*************************************************************************
+ *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  State.cs
  *  Description  :  Null.
@@ -13,17 +13,17 @@
 namespace MGS.FSM
 {
     /// <summary>
-    /// Represents a state in a finite state machine.
+    /// FSM State.
     /// </summary>
     public abstract class State : IState
     {
         /// <summary>
-        /// Gets the current status of the state.
+        /// Current status.
         /// </summary>
         public Status Status { protected set; get; }
 
         /// <summary>
-        /// Called when the state is being prepared.
+        /// Prepares the state.
         /// </summary>
         public virtual void Prepare()
         {
@@ -39,7 +39,7 @@ namespace MGS.FSM
         }
 
         /// <summary>
-        /// Called when the state is being entered.
+        /// Enters the state.
         /// </summary>
         public virtual void Enter()
         {
@@ -55,7 +55,7 @@ namespace MGS.FSM
         }
 
         /// <summary>
-        /// Called when the state is being exited.
+        /// Exits the state.
         /// </summary>
         public virtual void Exit()
         {
