@@ -23,27 +23,11 @@ namespace MGS.FSM
         public Status Status { protected set; get; }
 
         /// <summary>
-        /// Prepares the state.
-        /// </summary>
-        public virtual void Prepare()
-        {
-            Status = Status.Preparing;
-        }
-
-        /// <summary>
-        /// Called when the state has been prepared.
-        /// </summary>
-        protected virtual void OnPrepared()
-        {
-            Status = Status.Prepared;
-        }
-
-        /// <summary>
         /// Enters the state.
         /// </summary>
         public virtual void Enter()
         {
-            Status = Status.Working;
+            Status = Status.Enter;
         }
 
         /// <summary>
@@ -59,7 +43,7 @@ namespace MGS.FSM
         /// </summary>
         public virtual void Exit()
         {
-            Status = Status.None;
+            Status = Status.Exit;
         }
     }
 }

@@ -20,19 +20,6 @@ namespace MGS.FSM
     /// </summary>
     public class FSMMono : MonoBehaviour
     {
-        /// <summary>
-        /// Event triggered on each update.
-        /// </summary>
-        public event Action OnUpdate;
-
-        /// <summary>
-        /// Updates the FSM.
-        /// </summary>
-        private void Update()
-        {
-            OnUpdate?.Invoke();
-        }
-
 #if UNITY_EDITOR
         /// <summary>
         /// Event triggered when seek.

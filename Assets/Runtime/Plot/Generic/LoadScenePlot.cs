@@ -45,20 +45,19 @@ namespace MGS.Plot
     }
 
     /// <summary>
-    /// Base class for load scene plots.
+    /// Base class for load scene plot.
     /// </summary>
     /// <typeparam name="T">The type of the scene plot parameters.</typeparam>
-    public abstract class LoadScenePlot<T> : Plot<T> where T : ScenePlotParam
+    public class LoadScenePlot<T> : Plot<T> where T : ScenePlotParam
     {
         /// <summary>
-        /// Prepare the scene plot.
+        /// Enters the scene plot.
         /// </summary>
-        public override void Prepare()
+        public override void Enter()
         {
-            base.Prepare();
-
+            base.Enter();
             var mode = Enum.Parse<LoadSceneMode>(param.loadMode, true);
-            LoadSceneAsync(param.sceneName, mode, param.setActive, OnPrepared);
+            LoadSceneAsync(param.sceneName, mode, param.setActive, OnLoadSceneCompleted);
         }
 
         /// <summary>
@@ -96,6 +95,14 @@ namespace MGS.Plot
         }
 
         /// <summary>
+        /// On load scene completed.
+        /// </summary>
+        protected virtual void OnLoadSceneCompleted()
+        {
+            OnCompleted();
+        }
+
+        /// <summary>
         /// Unload the scene asynchronously.
         /// </summary>
         /// <param name="sceneName">The name of the scene to unload.</param>
@@ -110,4 +117,9 @@ namespace MGS.Plot
             StartCoroutine(UnloadScene());
         }
     }
+
+    /// <summary>
+    /// Represents a plot that load a scene.
+    /// </summary>
+    public class LoadScenePlot : LoadScenePlot<ScenePlotParam> { }
 }

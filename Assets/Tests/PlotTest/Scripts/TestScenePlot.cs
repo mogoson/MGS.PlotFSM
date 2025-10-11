@@ -11,10 +11,9 @@
  *************************************************************************/
 
 using System;
-using MGS.Plot;
 using UnityEngine;
 
-namespace PlotTest
+namespace MGS.Plot.Tests
 {
     [Serializable]
     /// <summary>
@@ -33,17 +32,14 @@ namespace PlotTest
     /// </summary>
     public class TestScenePlot : LoadScenePlot<TestScenePlotParam>
     {
-        /// <summary>
-        /// Called when entering the test scene plot.
-        /// </summary>
-        public override void Enter()
+        protected override void OnLoadSceneCompleted()
         {
-            base.Enter();
-
-            var objGo = GameObject.Find(param.objName);
-            objGo.GetComponent<MeshRenderer>().material.color = Color.red;
-
-            DelayInvokeAsync(10, OnCompleted);
+            StartDelayCoroutine(2.5f, () =>
+            {
+                var objGo = GameObject.Find(param.objName);
+                objGo.GetComponent<MeshRenderer>().material.color = Color.red;
+            });
+            StartDelayCoroutine(5.0f, OnCompleted);
         }
     }
 }

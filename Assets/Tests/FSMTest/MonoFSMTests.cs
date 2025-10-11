@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  MonoFSMTest.cs
+ *  File         :  MonoFSMTests.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -10,19 +10,18 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.FSM;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace FSMTest
+namespace MGS.FSM.Tests
 {
     /// <summary>
     /// Unit test class for MonoFSM.
     /// </summary>
-    public class MonoFSMTest
+    public class MonoFSMTests
     {
         IFSM fSM;
 
@@ -41,7 +40,7 @@ namespace FSMTest
         [TearDown]
         public void TearDown()
         {
-            fSM.Release();
+            fSM.Dispose();
             fSM = null;
         }
 
@@ -49,7 +48,7 @@ namespace FSMTest
         /// Test the execution of FSM states.
         /// </summary>
         [UnityTest]
-        public IEnumerator TestFSMRunStates()
+        public IEnumerator FSMRunStatesTest()
         {
             var states = new List<IState>()
             {

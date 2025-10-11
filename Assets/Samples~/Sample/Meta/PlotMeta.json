@@ -16,7 +16,7 @@
             "setActive":false,
             "unloadExit": false
         },
-        "type": "MGS.Plot.LoadSceneOnlyPlot, MGS.Plot"
+        "type": "MGS.Plot.LoadScenePlot, MGS.Plot"
     },
     {
         "param": {

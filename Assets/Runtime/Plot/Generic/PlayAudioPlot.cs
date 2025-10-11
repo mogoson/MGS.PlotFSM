@@ -55,58 +55,21 @@ namespace MGS.Plot
         protected AudioSource audioSource;
 
         /// <summary>
-        /// Prepares the plot by creating an audio source, loading the audio clip, and setting the volume, pitch, and loop properties.
-        /// </summary>
-        public override void Prepare()
-        {
-            base.Prepare();
-            audioSource = CreateAudioSource();
-            audioSource.clip = LoadAudioClip(param.audio);
-            audioSource.volume = param.volume;
-            audioSource.pitch = param.pitch;
-            audioSource.loop = param.loop;
-            OnPrepared();
-        }
-
-        /// <summary>
         /// Enters the plot by playing the audio clip and delaying the completion of the plot.
         /// </summary>
         public override void Enter()
         {
             base.Enter();
+
+            audioSource = CreateAudioSource(param);
             audioSource.Play();
 
             var isCustomDuration = param.duration > 0;
             if (isCustomDuration || !param.loop)
             {
                 var duration = isCustomDuration ? param.duration : audioSource.clip.length;
-                DelayInvokeAsync((float)duration, OnCompleted);
+                StartDelayCoroutine((float)duration, OnCompleted);
             }
-        }
-
-        /// <summary>
-        /// Loads an audio clip from the specified URL.
-        /// </summary>
-        /// <param name="url">The URL of the audio clip.</param>
-        /// <returns>The loaded audio clip.</returns>
-        protected AudioClip LoadAudioClip(string url)
-        {
-            var clip = Resources.Load<AudioClip>(url);
-            if (clip == null)
-            {
-                Debug.LogError($"Can not load AudioClip from {url}");
-            }
-            return clip;
-        }
-
-        /// <summary>
-        /// Creates an audio source game object and adds an audio source component to it.
-        /// </summary>
-        /// <returns>The created audio source.</returns>
-        protected AudioSource CreateAudioSource()
-        {
-            var go = new GameObject($"{GetType().Name}_{nameof(AudioSource)}");
-            return go.AddComponent<AudioSource>();
         }
 
         /// <summary>
@@ -117,6 +80,37 @@ namespace MGS.Plot
             base.Exit();
             audioSource.Stop();
             UnityEngine.Object.Destroy(audioSource.gameObject);
+        }
+
+        /// <summary>
+        /// Creates an audio source game object and adds an audio source component to it.
+        /// </summary>
+        /// <returns>The created audio source.</returns>
+        protected virtual AudioSource CreateAudioSource(AudioPlotParam param)
+        {
+            var go = new GameObject($"{GetType().Name}_{nameof(AudioSource)}");
+            var audioSource = go.AddComponent<AudioSource>();
+
+            audioSource.clip = LoadAudioClip(param.audio);
+            audioSource.volume = param.volume;
+            audioSource.pitch = param.pitch;
+            audioSource.loop = param.loop;
+            return audioSource;
+        }
+
+        /// <summary>
+        /// Loads an audio clip from the specified URL.
+        /// </summary>
+        /// <param name="url">The URL of the audio clip.</param>
+        /// <returns>The loaded audio clip.</returns>
+        protected virtual AudioClip LoadAudioClip(string url)
+        {
+            var clip = Resources.Load<AudioClip>(url);
+            if (clip == null)
+            {
+                Debug.LogError($"Can not load AudioClip from {url}");
+            }
+            return clip;
         }
     }
 }

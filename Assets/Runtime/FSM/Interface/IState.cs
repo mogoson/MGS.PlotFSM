@@ -23,11 +23,6 @@ namespace MGS.FSM
         Status Status { get; }
 
         /// <summary>
-        /// Prepares the state.
-        /// </summary>
-        void Prepare();
-
-        /// <summary>
         /// Enters the state.
         /// </summary>
         void Enter();

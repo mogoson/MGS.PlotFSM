@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
 using System.Collections.Generic;
 
 namespace MGS.FSM
@@ -17,8 +18,13 @@ namespace MGS.FSM
     /// <summary>
     /// Finite state machine.
     /// </summary>
-    public interface IFSM
+    public interface IFSM : IDisposable
     {
+        /// <summary>
+        /// On transfer state event.
+        /// </summary>
+        event Action<int, IState> OnTransfer;
+
         /// <summary>
         /// Current index of the state.
         /// </summary>
@@ -69,18 +75,8 @@ namespace MGS.FSM
         void Seek(int index);
 
         /// <summary>
-        /// Pauses the state machine.
-        /// </summary>
-        void Pause();
-
-        /// <summary>
         /// Stops the state machine.
         /// </summary>
         void Stop();
-
-        /// <summary>
-        /// Releases all resources used by the state machine.
-        /// </summary>
-        void Release();
     }
 }

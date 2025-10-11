@@ -23,23 +23,18 @@ namespace MGS.FSM
         None = 0,
 
         /// <summary>
-        /// Preparing status.
+        /// Enter status.
         /// </summary>
-        Preparing = 1,
-
-        /// <summary>
-        /// Prepared status.
-        /// </summary>
-        Prepared = 2,
-
-        /// <summary>
-        /// Working status.
-        /// </summary>
-        Working = 3,
+        Enter = 1,
 
         /// <summary>
         /// Completed status.
         /// </summary>
-        Completed = 4
+        Completed = 2,
+
+        /// <summary>
+        /// Exit status.
+        /// </summary>
+        Exit = 3
     }
 }

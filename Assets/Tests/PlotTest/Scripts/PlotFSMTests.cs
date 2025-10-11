@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright © 2024 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  PlotFSMTest.cs
+ *  File         :  PlotFSMTests.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -12,18 +12,17 @@
 
 using System.Collections;
 using System.IO;
-using MGS.Plot;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace PlotTest
+namespace MGS.Plot.Tests
 {
     /// <summary>
     /// Unit test class for DramaPlayer.
     /// </summary>
-    public class PlotFSMTest
+    public class PlotFSMTests
     {
         IPlotFSM plotFSM;
 
@@ -42,7 +41,7 @@ namespace PlotTest
         [TearDown]
         public void TearDown()
         {
-            plotFSM.Release();
+            plotFSM.Dispose();
             plotFSM = null;
         }
 
@@ -50,7 +49,7 @@ namespace PlotTest
         /// Unit test for running plots in the PlotFSM.
         /// </summary>
         [UnityTest]
-        public IEnumerator TestFSMRunPlots()
+        public IEnumerator FSMRunPlotsTest()
         {
             var file = $"{Application.dataPath}/Tests/PlotTest/Meta/PlotMeta.json";
             var json = File.ReadAllText(file);
@@ -59,7 +58,7 @@ namespace PlotTest
             plotFSM.Enqueue(metas);
             plotFSM.Start();
 
-            yield return new WaitForSeconds(30);
+            yield return new WaitForSeconds(12.5f);
         }
     }
 }

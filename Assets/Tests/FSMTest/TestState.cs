@@ -10,10 +10,9 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.FSM;
 using UnityEngine;
 
-namespace FSMTest
+namespace MGS.FSM.Tests
 {
     /// <summary>
     /// Represents a test state.
@@ -32,21 +31,6 @@ namespace FSMTest
         }
 
         /// <summary>
-        /// Called when the state is being prepared.
-        /// </summary>
-        public override void Prepare()
-        {
-            base.Prepare();
-            Debug.Log($"State {id} is Preparing");
-
-            DelayInvokeAsync(1, () =>
-            {
-                OnPrepared();
-                Debug.Log($"State {id} is Prepared");
-            });
-        }
-
-        /// <summary>
         /// Called when entering the state.
         /// </summary>
         public override void Enter()
@@ -54,7 +38,7 @@ namespace FSMTest
             base.Enter();
             Debug.Log($"Entering state {id}");
 
-            DelayInvokeAsync(5, () =>
+            StartDelayCoroutine(5, () =>
             {
                 Debug.Log($"State {id} work completed");
                 OnCompleted();

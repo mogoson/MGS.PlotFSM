@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,17 +25,18 @@ namespace MGS.FSM
         /// The FSMMono instance used by the MonoFSM.
         /// </summary>
         protected FSMMono mono;
+        protected Coroutine cruiser;
+        protected YieldInstruction instruction;
 
         /// <summary>
         /// Creates a new instance of MonoFSM.
         /// </summary>
-        public MonoFSM()
+        /// <param name="interval">Interval of cruiser (ms).</param>
+        public MonoFSM(int interval = 250)
         {
-            mono = new GameObject(nameof(FSMMono)).AddComponent<FSMMono>();
+            instruction = new WaitForSeconds(interval / 1000f);
+            mono = new GameObject(GetType().Name).AddComponent<FSMMono>();
             Object.DontDestroyOnLoad(mono.gameObject);
-
-            mono.enabled = false;
-            mono.OnUpdate += Update;
 
 #if UNITY_EDITOR
             mono.OnSeek += snap => Seek(Index + snap);
@@ -69,15 +71,10 @@ namespace MGS.FSM
         /// </summary>
         public override void Start()
         {
-            mono.enabled = true;
-        }
-
-        /// <summary>
-        /// Pauses the FSM.
-        /// </summary>
-        public override void Pause()
-        {
-            mono.enabled = false;
+            if (cruiser == null)
+            {
+                cruiser = mono.StartCoroutine(StartCruiser());
+            }
         }
 
         /// <summary>
@@ -86,17 +83,33 @@ namespace MGS.FSM
         public override void Stop()
         {
             base.Stop();
-            mono.enabled = false;
+            if (cruiser != null)
+            {
+                mono.StopCoroutine(cruiser);
+                cruiser = null;
+            }
         }
 
         /// <summary>
-        /// Releases the FSM.
+        /// Dispose the FSM and clear assets.
         /// </summary>
-        public override void Release()
+        public override void Dispose()
         {
-            base.Release();
+            base.Dispose();
             Object.Destroy(mono.gameObject);
             mono = null;
+        }
+
+        /// <summary>
+        /// Start cruiser to tick loop.
+        /// </summary>
+        protected IEnumerator StartCruiser()
+        {
+            while (true)
+            {
+                Update();
+                yield return instruction;
+            }
         }
     }
 }

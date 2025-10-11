@@ -27,6 +27,12 @@ namespace MGS.Plot
         public new IPlot State { get { return base.State as IPlot; } }
 
         /// <summary>
+        /// Creates a new instance of PlotFSM.
+        /// </summary>
+        /// <param name="interval">Interval of cruiser (ms).</param>
+        public PlotFSM(int interval = 250) : base(interval) { }
+
+        /// <summary>
         /// Enqueue plot states base on plot meta.
         /// </summary>
         /// <param name="metas">Plot meta datas.</param>

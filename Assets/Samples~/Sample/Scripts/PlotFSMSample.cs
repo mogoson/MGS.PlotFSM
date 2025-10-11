@@ -20,7 +20,11 @@ namespace MGS.Plot.Sample
     {
         private void Start()
         {
+#if DEVELOP
+            var file = $"{Application.dataPath}/Samples/Sample/Meta/PlotMeta.json";
+#else
             var file = $"{Application.dataPath}/Samples/Plot FSM/1.0.0/Sample/Meta/PlotMeta.json";
+#endif
             var json = File.ReadAllText(file);
             var metas = JsonConvert.DeserializeObject<PlotMeta[]>(json);
 

@@ -7,7 +7,7 @@
             "uiName": "",
             "unloadExit": true
         },
-        "type": "PlotTest.TestScenePlot, MGS.Plot.Tests"
+        "type": "MGS.Plot.Tests.TestScenePlot, MGS.Plot.Tests"
     },
     {
         "param": {
@@ -17,6 +17,6 @@
             "uiName": "",
             "unloadExit": true
         },
-        "type": "PlotTest.TestScenePlot, MGS.Plot.Tests"
+        "type": "MGS.Plot.Tests.TestScenePlot, MGS.Plot.Tests"
     }
 ]

@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
 using System.Collections.Generic;
 
 namespace MGS.FSM
@@ -19,6 +20,11 @@ namespace MGS.FSM
     /// </summary>
     public abstract class FSM : IFSM
     {
+        /// <summary>
+        /// On transfer state event.
+        /// </summary>
+        public event Action<int, IState> OnTransfer;
+
         /// <summary>
         /// Current index of the state.
         /// </summary>
@@ -95,11 +101,6 @@ namespace MGS.FSM
         }
 
         /// <summary>
-        /// Pauses the FSM.
-        /// </summary>
-        public abstract void Pause();
-
-        /// <summary>
         /// Stops the FSM.
         /// </summary>
         public virtual void Stop()
@@ -109,9 +110,9 @@ namespace MGS.FSM
         }
 
         /// <summary>
-        /// Releases the FSM and clears all states.
+        /// Dispose the FSM and clear assets.
         /// </summary>
-        public virtual void Release()
+        public virtual void Dispose()
         {
             Stop();
             states = null;
@@ -131,28 +132,18 @@ namespace MGS.FSM
             switch (State.Status)
             {
                 case Status.None:
-                    State.Prepare();
-                    break;
-
-                case Status.Prepared:
+                case Status.Exit:
                     State.Enter();
+                    InvokeOnTransfer(Index, State);
                     break;
 
-                case Status.Working:
+                case Status.Enter:
                     break;
 
                 case Status.Completed:
-                    var next = Find(Index + 1);
-                    if (next == null || next.Status == Status.Prepared)
-                    {
-                        Index++;
-                        State.Exit();
-                        next?.Enter();
-                    }
-                    else if (next.Status == Status.None)
-                    {
-                        next.Prepare();
-                    }
+                    State.Exit();
+                    InvokeOnTransfer(Index, State);
+                    Index++;
                     break;
             }
         }
@@ -177,10 +168,25 @@ namespace MGS.FSM
         /// <param name="state">The state to exit.</param>
         protected void ExitState(IState state)
         {
-            if (state != null && state.Status != Status.None)
+            if (state == null)
             {
-                state.Exit();
+                return;
             }
+            if (state.Status == Status.None || state.Status == Status.Exit)
+            {
+                return;
+            }
+            state.Exit();
+        }
+
+        /// <summary>
+        /// Invoke On transfer state event.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="state"></param>
+        protected void InvokeOnTransfer(int index, IState state)
+        {
+            OnTransfer?.Invoke(index, state);
         }
     }
 }

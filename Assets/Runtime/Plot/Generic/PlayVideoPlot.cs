@@ -59,71 +59,21 @@ namespace MGS.Plot
         protected VideoPlayer videoPlayer;
 
         /// <summary>
-        /// Prepares the plot for execution.
-        /// </summary>
-        public override void Prepare()
-        {
-            base.Prepare();
-
-            videoPlayer = CreateVideoPlayer();
-            videoPlayer.targetCamera = Camera.main;
-
-            videoPlayer.clip = LoadVideoClip(param.video);
-            videoPlayer.renderMode = Enum.Parse<VideoRenderMode>(param.renderMode, true);
-            videoPlayer.aspectRatio = Enum.Parse<VideoAspectRatio>(param.aspectRatio, true);
-            videoPlayer.isLooping = param.loop;
-
-            videoPlayer.prepareCompleted += OnPrepareCompleted;
-            videoPlayer.Prepare();
-        }
-
-        /// <summary>
-        /// Loads the video clip from the specified URL.
-        /// </summary>
-        /// <param name="url">The URL of the video clip.</param>
-        /// <returns>The loaded video clip.</returns>
-        protected VideoClip LoadVideoClip(string url)
-        {
-            var clip = Resources.Load<VideoClip>(url);
-            if (clip == null)
-            {
-                Debug.LogError($"Can not load VideoClip from {url}");
-            }
-            return clip;
-        }
-
-        /// <summary>
-        /// Called when the video player has completed preparing.
-        /// </summary>
-        /// <param name="source">The video player that completed preparing.</param>
-        protected virtual void OnPrepareCompleted(VideoPlayer source)
-        {
-            OnPrepared();
-        }
-
-        /// <summary>
-        /// Creates a new video player.
-        /// </summary>
-        /// <returns>The created video player.</returns>
-        protected VideoPlayer CreateVideoPlayer()
-        {
-            var go = new GameObject($"{GetType().Name}_{nameof(VideoPlayer)}");
-            return go.AddComponent<VideoPlayer>();
-        }
-
-        /// <summary>
         /// Enters the plot.
         /// </summary>
         public override void Enter()
         {
             base.Enter();
+
+            videoPlayer = CreateVideoPlayer(param);
+            videoPlayer.targetCamera = Camera.main;
             videoPlayer.Play();
 
             var isCustomDuration = param.duration > 0;
             if (isCustomDuration || !param.loop)
             {
                 var duration = isCustomDuration ? param.duration : videoPlayer.clip.length;
-                DelayInvokeAsync((float)duration, OnCompleted);
+                StartDelayCoroutine((float)duration, OnCompleted);
             }
         }
 
@@ -135,6 +85,37 @@ namespace MGS.Plot
             base.Exit();
             videoPlayer.Stop();
             UnityEngine.Object.Destroy(videoPlayer.gameObject);
+        }
+
+        /// <summary>
+        /// Creates a new video player.
+        /// </summary>
+        /// <returns>The created video player.</returns>
+        protected virtual VideoPlayer CreateVideoPlayer(VideoPlotParam param)
+        {
+            var go = new GameObject($"{GetType().Name}_{nameof(VideoPlayer)}");
+            var videoPlayer = go.AddComponent<VideoPlayer>();
+
+            videoPlayer.clip = LoadVideoClip(param.video);
+            videoPlayer.renderMode = Enum.Parse<VideoRenderMode>(param.renderMode, true);
+            videoPlayer.aspectRatio = Enum.Parse<VideoAspectRatio>(param.aspectRatio, true);
+            videoPlayer.isLooping = param.loop;
+            return videoPlayer;
+        }
+
+        /// <summary>
+        /// Loads the video clip from the specified URL.
+        /// </summary>
+        /// <param name="url">The URL of the video clip.</param>
+        /// <returns>The loaded video clip.</returns>
+        protected virtual VideoClip LoadVideoClip(string url)
+        {
+            var clip = Resources.Load<VideoClip>(url);
+            if (clip == null)
+            {
+                Debug.LogError($"Can not load VideoClip from {url}");
+            }
+            return clip;
         }
     }
 }
