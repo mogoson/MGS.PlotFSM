@@ -1,0 +1,17 @@
+{
+    "name": "MGS.PlotFSM.Sample",
+    "rootNamespace": "",
+    "references": [
+        "MGS.FSM",
+        "MGS.PlotFSM"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

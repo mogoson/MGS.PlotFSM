@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Samples/Sample/Scenes/Main.unity
-    guid: 5729985fb0680064fa5396195cffded0
+    path: Assets/Tests/Scenes/TestCubeScene.unity
+    guid: a2a4ae17aa595b341941fd1f9ee6b682
+  - enabled: 1
+    path: Assets/Tests/Scenes/TestSphereScene.unity
+    guid: 325f2a9ef0e7df24fb16467bc185c907
   - enabled: 1
     path: Assets/Samples/Sample/Scenes/Additive.unity
     guid: d49afba96c6e8d146961426e99276f88
   - enabled: 1
-    path: Assets/Tests/PlotTest/Scenes/TestCubeScene.unity
-    guid: a2a4ae17aa595b341941fd1f9ee6b682
-  - enabled: 1
-    path: Assets/Tests/PlotTest/Scenes/TestSphereScene.unity
-    guid: 325f2a9ef0e7df24fb16467bc185c907
+    path: Assets/Samples/Sample/Scenes/Main.unity
+    guid: 5729985fb0680064fa5396195cffded0
   m_configObjects: {}

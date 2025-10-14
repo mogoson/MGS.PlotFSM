@@ -10,17 +10,19 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+//#define DEVELOPMENT
+
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace MGS.Plot.Sample
+namespace MGS.FSM.Plot.Sample
 {
     public class PlotFSMSample : MonoBehaviour
     {
         private void Start()
         {
-#if DEVELOP
+#if DEVELOPMENT
             var file = $"{Application.dataPath}/Samples/Sample/Meta/PlotMeta.json";
 #else
             var file = $"{Application.dataPath}/Samples/Plot FSM/1.0.0/Sample/Meta/PlotMeta.json";
@@ -29,7 +31,7 @@ namespace MGS.Plot.Sample
             var metas = JsonConvert.DeserializeObject<PlotMeta[]>(json);
 
             Global.PlotFSM.Enqueue(metas);
-            Global.PlotFSM.Start();
+            Global.PlotFSM.Activate();
         }
     }
 }

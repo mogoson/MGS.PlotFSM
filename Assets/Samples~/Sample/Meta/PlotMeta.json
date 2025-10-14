@@ -7,7 +7,7 @@
             "loop": false,
             "duration": 0
         },
-        "type": "MGS.Plot.PlayVideoPlot, MGS.Plot"
+        "type": "MGS.FSM.Plot.PlayVideoPlot, MGS.PlotFSM"
     },
     {
         "param": {
@@ -16,7 +16,7 @@
             "setActive":false,
             "unloadExit": false
         },
-        "type": "MGS.Plot.LoadScenePlot, MGS.Plot"
+        "type": "MGS.FSM.Plot.LoadScenePlot, MGS.PlotFSM"
     },
     {
         "param": {
@@ -26,6 +26,6 @@
             "loop": false,
             "duration": 0
         },
-        "type": "MGS.Plot.PlayAudioPlot, MGS.Plot"
+        "type": "MGS.FSM.Plot.PlayAudioPlot, MGS.PlotFSM"
     }
 ]

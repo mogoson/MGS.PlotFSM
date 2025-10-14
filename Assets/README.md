@@ -17,6 +17,7 @@ FSM to play sequence plots.
 - Unity --> Window --> Package Manager --> "+" --> Add package from git URL...
 
   ```text
+  https://github.com/mogoson/MGS.FSM.git?path=/Assets
   https://github.com/mogoson/MGS.PlotFSM.git?path=/Assets
   ```
 

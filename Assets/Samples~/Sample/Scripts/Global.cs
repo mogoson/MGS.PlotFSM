@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.Plot.Sample
+namespace MGS.FSM.Plot.Sample
 {
     public sealed class Global
     {

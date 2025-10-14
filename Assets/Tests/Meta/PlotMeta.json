@@ -1,0 +1,22 @@
+[
+    {
+        "param": {
+            "loadMode": "Additive",
+            "objName": "Cube",
+            "sceneName": "TestCubeScene",
+            "uiName": "",
+            "unloadExit": true
+        },
+        "type": "MGS.FSM.Plot.Tests.PlotSample, MGS.PlotFSM.Tests"
+    },
+    {
+        "param": {
+            "loadMode": "Additive",
+            "objName": "Sphere",
+            "sceneName": "TestSphereScene",
+            "uiName": "",
+            "unloadExit": true
+        },
+        "type": "MGS.FSM.Plot.Tests.PlotSample, MGS.PlotFSM.Tests"
+    }
+]
