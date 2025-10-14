@@ -23,7 +23,6 @@ FSM to play sequence plots.
 
 ## Usage
 
-# Usage
 1. Create a Instance of PlotFSM.
 1. Read config file (json content).
 1. Deserialize json content to PlotMeta array.
