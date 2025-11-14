@@ -29,7 +29,7 @@ namespace MGS.FSM.Plot
         {
             var type = Type.GetType(meta.type);
             var plot = (IPlot)Activator.CreateInstance(type);
-            plot.Initialize(meta.param);
+            plot.Initialize(meta.param.ToString());
             return plot;
         }
 
