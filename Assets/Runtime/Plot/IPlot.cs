@@ -21,6 +21,6 @@ namespace MGS.FSM.Plot
         /// Initializes the plot with the specified parameter.
         /// </summary>
         /// <param name="param">The parameter to initialize the plot.</param>
-        void Initialize(string param);
+        void Initialize(object param);
     }
 }

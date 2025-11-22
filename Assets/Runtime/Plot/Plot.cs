@@ -29,9 +29,9 @@ namespace MGS.FSM.Plot
         /// Initializes the plot with the specified parameter.
         /// </summary>
         /// <param name="param">The parameter to initialize the plot with.</param>
-        public virtual void Initialize(string param)
+        public virtual void Initialize(object param)
         {
-            this.param = JsonConvert.DeserializeObject<T>(param);
+            this.param = JsonConvert.DeserializeObject<T>(param.ToString());
         }
     }
 }

@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-//#define DEVELOP
+//#define DEVELOPMENT
 
 using System.IO;
 using Newtonsoft.Json;
@@ -22,7 +22,7 @@ namespace MGS.FSM.Plot.Sample
     {
         private void Start()
         {
-#if DEVELOP
+#if DEVELOPMENT
             var file = $"{Application.dataPath}/Samples/Sample/Meta/PlotMeta.json";
 #else
             var file = $"{Application.dataPath}/Samples/Plot FSM/1.0.0/Sample/Meta/PlotMeta.json";
